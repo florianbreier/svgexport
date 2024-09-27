@@ -1,10 +1,11 @@
 {
-  "name": "svgexport",
+  "name": "@florianbreier/svgexport",
   "version": "0.4.1",
   "description": "Node.js module and command-line tool for exporting SVG to PNG and JPEG.",
   "author": "Ali Shakiba",
   "contributors": [
-    "Michael Heerklotz"
+    "Michael Heerklotz",
+    "Florian Breier"
   ],
   "keywords": [
     "svg",
