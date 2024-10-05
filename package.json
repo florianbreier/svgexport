@@ -3,6 +3,7 @@
   "version": "0.4.1",
   "description": "Node.js module and command-line tool for exporting SVG to PNG and JPEG.",
   "author": "Ali Shakiba",
+  "private": false,
   "contributors": [
     "Michael Heerklotz",
     "Florian Breier"
