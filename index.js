@@ -21,16 +21,17 @@ function cli(args) {
 
   if (args.length > 1) {
     render({
-      input : [ args.shift() ],
-      output : [ args ],
-      cwd : process.cwd()
+      input: [args.shift()],
+      output: [args],
+      cwd: process.cwd()
     }, process);
     return;
   }
 
   if (!args.length || (args.length === 1 && /(-h|--help|help)$/i.test(args[0]))) {
     try {
-          .match(/```usage([\s\S]*?)```/i)[1].replace(/\nsvgexport/,
+      console.log(fs.readFileSync(path.resolve(__dirname, 'README.md'), 'utf8')
+        .match(/```usage([\s\S]*?)```/i)[1].replace(/\nsvgexport/,
           '\nUsage: svgexport').replace(/\nsvgexport/g, '\n  or:  svgexport'));
     } catch (err) {
       console.log('Off-line `svgexport` help is not available!');
@@ -45,15 +46,15 @@ async function render(data, done) {
 
   var stdio = done;
 
-  var stdout = stdio && stdio.stdout ? function(data) {
+  var stdout = stdio && stdio.stdout ? function (data) {
     stdio.stdout.write(data);
   } : noop;
 
-  var stderr = stdio && stdio.stderr ? function(data) {
+  var stderr = stdio && stdio.stderr ? function (data) {
     stdio.stderr.write(data);
   } : noop;
 
-  done = typeof done === 'function' ? done : function(err) {
+  done = typeof done === 'function' ? done : function (err) {
     if (err) {
       stderr(err);
     }
@@ -78,8 +79,8 @@ async function render(data, done) {
 
   var commands = [];
 
-  data = Array.isArray(data) ? data : [ data ];
-  data.forEach(function(entry) {
+  data = Array.isArray(data) ? data : [data];
+  data.forEach(function (entry) {
 
     var input = entry.src || entry.input;
     var outputs = entry.dest || entry.output;
@@ -92,26 +93,26 @@ async function render(data, done) {
 
     if (!Array.isArray(outputs)) {
       // one string
-      outputs = [ outputs.split(/\s+/) ];
+      outputs = [outputs.split(/\s+/)];
 
-    } else if (!outputs.some(function(output) {
+    } else if (!outputs.some(function (output) {
       return Array.isArray(output);
     })) {
       // array, but not 2d array
-      outputs = outputs.map(function(output) {
+      outputs = outputs.map(function (output) {
         return output.split(/\s+/);
       });
     }
 
     input[0] = path.resolve(cwd, input[0]);
 
-    outputs.forEach(function(output) {
+    outputs.forEach(function (output) {
 
       output[0] = path.resolve(cwd, output[0]);
 
       commands.push({
-        input : input,
-        output : output
+        input: input,
+        output: output
       });
     });
   });
