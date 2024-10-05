@@ -30,10 +30,9 @@ function cli(args) {
 
   if (!args.length || (args.length === 1 && /(-h|--help|help)$/i.test(args[0]))) {
     try {
-      console.log(fs.readFileSync(path.resolve(__dirname, 'README.md'), 'utf8')
           .match(/```usage([\s\S]*?)```/i)[1].replace(/\nsvgexport/,
           '\nUsage: svgexport').replace(/\nsvgexport/g, '\n  or:  svgexport'));
-    } catch (e) {
+    } catch (err) {
       console.log('Off-line `svgexport` help is not available!');
     }
     return;
@@ -66,7 +65,7 @@ async function render(data, done) {
     cwd = path.dirname(data);
     try {
       data = require(data);
-    } catch (e) {
+    } catch (err) {
       return done('Error: Invalid data file: ' + data + '\n');
     }
   } else {

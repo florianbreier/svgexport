@@ -1,9 +1,8 @@
-var fs = require('fs');
 var p = require('path');
 var expect = require('expect.js');
 var child_process = require('child_process');
 var svgexport = require('../');
-
+const {describe,it}=require("mocha");
 // TODO: compare exported files
 
 describe('Module', function() {
@@ -96,7 +95,7 @@ describe('CLI', function() {
   it('simple.svg', function(done) {
     cli([ 'svg/simple.svg', p.join('exported', 'test.png') ], {
       stderr : /^$/,
-      done : function(err, stdout, stderr) {
+      done : function(err, stdout, _stderr) {
         if (!err) {
           expect(stdout.split(resolve('')).join('')).eql(output.testsvg);
         }
@@ -107,7 +106,7 @@ describe('CLI', function() {
   it('test.json', function(done) {
     cli([ 'test.json' ], {
       stderr : /^$/,
-      done : function(err, stdout, stderr) {
+      done : function(err, stdout, _stderr) {
         if (!err) {
           expect(stdout.split(resolve('')).join('').split('\n').sort()).eql(
               output.testjson.split('\n').sort());

@@ -1,5 +1,6 @@
 var resize = require('../resize');
 var expect = require('expect.js');
+const {describe,it}=require("mocha");
 
 describe('Resize', function() {
   it('width', function() {
